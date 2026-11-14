@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><script>const testSettings=[{"name": "APP_LOGO", "type": "IMAGE", "value": ""}, {"name": "APP_BACKGROUND_TYPE", "type": "SELECT", "value": {"options": [{"label": "Cor", "value": "COLOR"}, {"label": "Imagem", "value": "IMAGE"}], "selected": "COLOR"}}, {"name": "APP_LAYOUT_WEBVIEW_ENABLED", "type": "BOOLEAN", "value": True}, {"name": "APP_LAYOUT_WEBVIEW", "type": "HTML", "value": "<h1>Interface de teste</h1>"}, {"name": "APP_NATIVE_COLOR_0", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_1", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_2", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_3", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_4", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_5", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_6", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_7", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_8", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_9", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_10", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_11", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_12", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_13", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_14", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_15", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_16", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_17", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_18", "type": "COLOR", "value": "#121212"}, {"name": "APP_NATIVE_COLOR_19", "type": "COLOR", "value": "#121212"}];const preview={APP_NATIVE_BACKGROUND_COLOR:'#101010',APP_NATIVE_CARD_COLOR:'#222222',APP_NATIVE_BUTTON_COLOR:'#7755ff',APP_LAYOUT_WEBVIEW_ENABLED:true,APP_LAYOUT_WEBVIEW:true};window.fetch=async(url,opts={})=>{const p=new URL(String(url),location.href).pathname;let d={};if(p==='/api/config-schema')d={defaultMode:'SSH_PROXY',modes:{}};else if(['/api/categories','/api/cdns','/api/configs'].includes(p))d={data:[]};else if(p==='/api/status')d={grpc:{active:true}};else if(p==='/api/app-themes'&&(!opts.method||opts.method==='GET'))d={activeId:'a',themes:[{id:'a',name:'Tema A',active:true,preview}]};else if(p==='/api/app-themes/a'&&opts.method==='PUT'){window.saved=opts.body;d={ok:true}}else if(p==='/api/app-themes/a')d={id:'a',name:'Tema A',active:true,preview,appConfigs:testSettings};else d={ok:true};return new Response(JSON.stringify(d),{status:200,headers:{'Content-Type':'application/json'}})};</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DTunnel — Painel de Configs</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235b8cff'/%3E%3Ctext x='32' y='43' font-family='Arial' font-size='24' font-weight='bold' text-anchor='middle' fill='white'%3EDT%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/theme.css">
+</head>
+<body>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="brand-mark">DT</span>
+      <span class="brand-text"><strong>DTunnel</strong><small>Painel de configs</small></span>
+    </div>
+
+    <nav id="tabs" aria-label="Seções do painel">
+      <button class="tab active" data-file="configs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="19" cy="17" r="2"/></svg>
+        <span>Conexões</span>
+      </button>
+      <button class="tab" data-file="categories">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h7v7H4zM13 5h7v7h-7zM4 14h7v5H4zM13 14h7v5h-7z"/></svg>
+        <span>Categorias</span>
+      </button>
+      <button class="tab" data-file="cdns">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.2 2.2 3.2 5 3.2 8s-1 5.8-3.2 8c-2.2-2.2-3.2-5-3.2-8S9.8 6.2 12 4z"/></svg>
+        <span>Endpoints</span>
+      </button>
+      <button class="tab" data-file="app_configs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
+        <span>Aplicativo</span>
+      </button>
+      <button class="tab" data-file="texts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14M5 10h14M5 15h9M5 20h6"/></svg>
+        <span>Textos</span>
+      </button>
+      <button class="tab" data-file="logs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v16H5z"/><path d="M8 8l2 2-2 2M12 12h4M8 16h8"/></svg>
+        <span>Logs</span>
+      </button>
+      <button class="tab" data-file="build">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M8 16V8l4-4 4 4v8M9 12h6"/></svg>
+        <span>Build APK</span>
+      </button>
+    </nav>
+
+    <div class="side-foot">
+      <button class="side-action" id="changePass" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        <span>Alterar senha</span>
+      </button>
+      <p class="side-version">DTunnel Server</p>
+    </div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="page-heading">
+        <span class="eyebrow">Gerenciamento</span>
+        <h1 id="pageTitle">Conexões</h1>
+        <p id="pageSub">Gerencie as conexões entregues ao aplicativo.</p>
+      </div>
+      <div class="status-pill" id="status"><span class="dot"></span><span>Conectando…</span></div>
+    </header>
+
+    <main class="content">
+      <section class="toolbar">
+        <label class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <input type="search" id="search" placeholder="Filtrar por nome, host, categoria…" autocomplete="off">
+          <kbd>/</kbd>
+        </label>
+        <span class="count" id="count"></span>
+        <div class="toolbar-actions">
+          <button class="btn ghost hidden" id="export" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 11l4 4 4-4M5 21h14"/></svg>
+            Exportar
+          </button>
+          <button class="btn ghost hidden" id="import" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V5M8 9l4-4 4 4M5 21h14"/></svg>
+            Importar
+          </button>
+          <input type="file" id="importFile" accept="application/json,.json" class="hidden">
+          <button class="btn ghost" id="restore" type="button" title="Restaurar o backup .bak do arquivo atual">Backup</button>
+          <button class="btn ghost" id="reload" type="button" title="Recarregar os dados do servidor">Recarregar</button>
+          <button class="btn primary" id="add" type="button">+ Novo</button>
+          <button class="btn success" id="save" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/></svg>
+            Salvar
+          </button>
+        </div>
+      </section>
+
+      <div id="editor"></div>
+      <div id="logs" class="logs hidden"></div>
+    </main>
+  </div>
+</div>
+
+<div class="dirty-bar" id="dirtyBar">
+  <span><strong>Alterações não salvas</strong> — salve para aplicar no app</span>
+  <button class="btn success" id="dirtySave" type="button">Salvar agora</button>
+</div>
+
+<div id="modal" class="modal hidden"></div>
+
+<div id="passModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="passTitle">
+  <div class="modal-box modal-sm">
+    <div class="modal-head">
+      <div class="modal-title">
+        <h2 id="passTitle">Alterar senha</h2>
+        <small>Proteja o acesso ao painel</small>
+      </div>
+      <button class="icon-btn" id="passClose" type="button" aria-label="Fechar">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-hint" id="passHint">A senha é usada no login do painel.</p>
+      <div class="form-grid">
+        <label class="fld wide"><span>Senha atual</span><input type="password" id="passCurrent" autocomplete="current-password"></label>
+        <label class="fld"><span>Nova senha</span><input type="password" id="passNew" autocomplete="new-password" placeholder="mínimo 4 caracteres"></label>
+        <label class="fld"><span>Confirmar nova senha</span><input type="password" id="passConfirm" autocomplete="new-password"></label>
+      </div>
+      <p class="form-error hidden" id="passError"></p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" id="passCancel" type="button">Cancelar</button>
+      <button class="btn primary" id="passSave" type="button">Salvar senha</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+<script>setTimeout(()=>{document.querySelector('#tabs .tab[data-file="app_configs"]').click();setTimeout(()=>{const card=!!document.querySelector('.theme-card'),build=!!document.querySelector('[data-theme-build]');document.querySelector('[data-theme-action="edit"]').click();setTimeout(()=>{const dialog=document.querySelector('.theme-config-dialog'),grid=document.querySelector('.theme-config-body .app-config-grid'),foot=document.querySelector('.theme-config-foot');document.body.dataset.referenceTest=[card,build,!!dialog,getComputedStyle(grid).gridTemplateColumns.split(' ').length,!!foot.querySelector('[data-theme-back]'),!!foot.querySelector('[data-theme-save]')].join(',');},300)},400)},500);</script></body>
+</html>
