@@ -1,20 +1,27 @@
-# runtime and private material
-/dtunnel-server/data/*.json
-/dtunnel-server/keys/*
-!/dtunnel-server/keys/.gitkeep
-/dtunnel-server/.env
-/dtunnel-mod/apk/*.apk
-/dtunnel-mod/patch/*.jks
-/dtunnel-mod/keys/*
-!/dtunnel-mod/keys/.gitkeep
-/dtunnel-mod/build/
-/dtunnel-mod/dist/
-/dtunnel-mod/out/
-*.apk
-*.jks
+# Runtime data and server-specific credentials
+dtunnel-server/data/*.json
+dtunnel-server/keys/*
+!dtunnel-server/keys/.gitkeep
+
+# APKs and Android build outputs
+dtunnel-mod/apk/*.apk
+dtunnel-mod/dist/*.apk
+dtunnel-mod/build/
+dtunnel-mod/patch/*.jks
+dtunnel-mod/patch/*.keystore
+dtunnel-mod/keys/*
+!dtunnel-mod/keys/.gitkeep
+
+# Private certificates, keys and environment files
 *.pem
 *.key
-*.log
+*.jks
+*.keystore
 .env
-__pycache__/
-*.pyc
+.env.*
+!*.env.example
+
+# Local dependencies and editor/OS metadata
+**/node_modules/
+.DS_Store
+Thumbs.db
