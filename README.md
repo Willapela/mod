@@ -7,9 +7,10 @@ Este repositório reúne o servidor gRPC/painel, a interface web com temas e edi
 Extraia o ZIP no Linux e rode como root:
 
 ```bash
-unzip dtunnel-mod-completo-github.zip -d /opt/dtunnel-repo
-cd /opt/dtunnel-repo/dtunnel-mod-completo-github
-./install-all.sh
+git clone https://github.com/Willapela/mod.git
+cd mod
+sudo bash ./install-all.sh
+
 ```
 
 O instalador atualiza `/opt/dtunnel-server` e `/root/apk-build/dtunnel-mod` (personalizáveis com `DT_INSTALL_DIR` e `DT_APK_BUILDER_DIR`), cria apenas os JSONs que estiverem faltando e preserva os dados e assets locais. Ele não reinicia serviços. Depois, configure o servidor conforme `dtunnel-server/README.md` e `DEPLOY.md`.
