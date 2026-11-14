@@ -1,0 +1,20 @@
+# runtime and private material
+/dtunnel-server/data/*.json
+/dtunnel-server/keys/*
+!/dtunnel-server/keys/.gitkeep
+/dtunnel-server/.env
+/dtunnel-mod/apk/*.apk
+/dtunnel-mod/patch/*.jks
+/dtunnel-mod/keys/*
+!/dtunnel-mod/keys/.gitkeep
+/dtunnel-mod/build/
+/dtunnel-mod/dist/
+/dtunnel-mod/out/
+*.apk
+*.jks
+*.pem
+*.key
+*.log
+.env
+__pycache__/
+*.pyc
